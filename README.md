@@ -52,6 +52,13 @@ The XOR problem is a classic ML test that simple linear models **can’t solve**
 
 ---
 
+## Contributions / Feedback
+
+- This project is part of my learning journey into AI and machine learning.
+- If you have ideas, feedback, suggestions, or even constructive critique — feel free to open an issue, fork the repo, or message me. I'd love to improve and learn from it!
+
+---
+
 ## Run It Yourself
 
 ```bash
@@ -60,3 +67,5 @@ pip install numpy
 
 # Run
 python main.py
+
+

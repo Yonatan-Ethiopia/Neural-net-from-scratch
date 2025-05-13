@@ -1,7 +1,7 @@
 import numpy as np
 
 inputs = np.array([[0,1], [1,0], [1,1], [0,0]])
-
+lnr_initial = 0.1
 target =np.array([ 1, 1, 0, 0]).reshape(-1,1)
 epoch = 1000
 weights = np.random.randn(2,1)
@@ -22,7 +22,12 @@ def backprop(x, w, b, p, t, z):
     dLDb = ( -t/p +(1-t)/(1-p))*(p*(1-p))*b
     return dLdW, dLDb
 
-for i in epoch:
+for i in range(1, 1+epoch):
+    lnr = lnr_initial/epoch
     p, z = predict(inputs)
     loss = binary_cross_entropy( target, p)
-    print(i)
+    dw,db = backprop(inputs, weights, bias, p, target, z)
+    weights = lnr*dw
+    bias = lnr*dB
+    if( epoch%100 ):
+        print(weights, lnr, bias)

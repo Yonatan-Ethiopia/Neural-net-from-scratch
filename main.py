@@ -21,5 +21,8 @@ def backprop(x, w, b, p, t, z):
     dLdW = ( -t/p +(1-t)/(1-p))*(p*(1-p))*x
     dLDb = ( -t/p +(1-t)/(1-p))*(p*(1-p))*b
     return dLdW, dLDb
-print(backprop(inputs, weights, bias, p, target, z))
-for(
+
+for i in epoch:
+    p, z = predict(inputs)
+    loss = binary_cross_entropy( target, p)
+    print(i)

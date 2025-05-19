@@ -16,19 +16,21 @@ def sigmoid(x):
 def A1(x):
     z = np.dot(x, w1)+b1
     a1= sigmoid(z)
-    return a1
+    return a1, z
 def A2(x):
     z = np.dot( x, w2.T)+b2
     a2 = sigmoid(z)
-    return a2
+    return a2, z
 def A3(x):
     z = np.dot( x, w3)+b3
     prediction= sigmoid(z)
     return prediction, z
-a1 = A1(inputs)
-a2 = A2(a1)
-a3, z = A3(a2)
-
+a1, z1 = A1(inputs)
+a2, z2 = A2(a1)
+a3, z3 = A3(a2)
+def sigmoid_derivative(x):
+    s = sigmoid(x)
+    return s*(1-s)
 def binary_cross_entropy(y_true, y_pred):
     epsilon = 1e-15
     y_pred = np.clip( y_pred, epsilon, 1- epsilon )
@@ -37,7 +39,11 @@ def binary_cross_entropy(y_true, y_pred):
 def backprop(x, p, t):
     m = len(x)
     dZ = p - t
+    dz2 = sigmoid_derivative(z2)
+    dz3 = sigmoid_derivative(z3)
     dW = (1/m) * np.dot(x.T, dZ)
+    dw2 = np.dot( A2.T, dz2)
+    dw3 = np.dot( A3.T, dz3)
     dB = (1/m) * np.sum(dZ)
     return dW,dB
 for i in range(1, 1+epoch):
